@@ -247,9 +247,47 @@
         }
       }
     },
+    "node_modules/@openzeppelin/contracts/token/ERC20/IERC20.sol": {
+      "lastModificationDate": 499162500000,
+      "contentHash": "ad7c2d0af148c8f9f097d65deeb4da6b",
+      "sourceName": "node_modules/@openzeppelin/contracts/token/ERC20/IERC20.sol",
+      "solcConfig": {
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "metadata": {
+            "bytecodeHash": "ipfs"
+          },
+          "outputSelection": {
+            "*": {
+              "": [
+                "ast"
+              ],
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers"
+              ]
+            }
+          },
+          "evmVersion": "london",
+          "libraries": {}
+        }
+      },
+      "imports": [],
+      "versionRequirement": "^0.8.0",
+      "artifacts": {
+        "IERC20": {
+          "0.8.4+commit.c7e474f2.Darwin.appleclang": "IERC20.sol/IERC20.json"
+        }
+      }
+    },
     "src/Application.sol": {
-      "lastModificationDate": 1656184548051,
-      "contentHash": "f5638438de0caa06cc9c83591498b0bf",
+      "lastModificationDate": 1656194510921,
+      "contentHash": "2ffa7086cd57f82dcc9465299c289d54",
       "sourceName": "src/Application.sol",
       "solcConfig": {
         "settings": {
@@ -280,11 +318,13 @@
       "imports": [
         "lib/openzeppelin-contracts/contracts/access/Ownable.sol",
         "lib/openzeppelin-contracts/contracts/utils/Context.sol",
+        "node_modules/@openzeppelin/contracts/token/ERC20/IERC20.sol",
         "src/LzApp.sol",
         "src/NonBlockingLzApp.sol",
         "src/interfaces/ILayerZeroEndpoint.sol",
         "src/interfaces/ILayerZeroReceiver.sol",
-        "src/interfaces/ILayerZeroUserApplicationConfig.sol"
+        "src/interfaces/ILayerZeroUserApplicationConfig.sol",
+        "src/interfaces/IToken.sol"
       ],
       "versionRequirement": "=0.8.4",
       "artifacts": {
@@ -383,8 +423,8 @@
       }
     },
     "src/Token.sol": {
-      "lastModificationDate": 1656187861495,
-      "contentHash": "54865f98b2ec60a54bc637f6ea4bbacf",
+      "lastModificationDate": 1656191937332,
+      "contentHash": "227e3a47395e46d956c3c7f57d6ea92c",
       "sourceName": "src/Token.sol",
       "solcConfig": {
         "settings": {
@@ -421,8 +461,8 @@
       ],
       "versionRequirement": "^0.8.4",
       "artifacts": {
-        "TokenContract": {
-          "0.8.4+commit.c7e474f2.Darwin.appleclang": "Token.sol/TokenContract.json"
+        "Token": {
+          "0.8.4+commit.c7e474f2.Darwin.appleclang": "Token.sol/Token.json"
         }
       }
     },
@@ -539,6 +579,46 @@
       "artifacts": {
         "ILayerZeroUserApplicationConfig": {
           "0.8.4+commit.c7e474f2.Darwin.appleclang": "ILayerZeroUserApplicationConfig.sol/ILayerZeroUserApplicationConfig.json"
+        }
+      }
+    },
+    "src/interfaces/IToken.sol": {
+      "lastModificationDate": 1656189483400,
+      "contentHash": "b6d337426284ae2a075f3ba57116561a",
+      "sourceName": "src/interfaces/IToken.sol",
+      "solcConfig": {
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "metadata": {
+            "bytecodeHash": "ipfs"
+          },
+          "outputSelection": {
+            "*": {
+              "": [
+                "ast"
+              ],
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers"
+              ]
+            }
+          },
+          "evmVersion": "london",
+          "libraries": {}
+        }
+      },
+      "imports": [
+        "node_modules/@openzeppelin/contracts/token/ERC20/IERC20.sol"
+      ],
+      "versionRequirement": "=0.8.4",
+      "artifacts": {
+        "IToken": {
+          "0.8.4+commit.c7e474f2.Darwin.appleclang": "IToken.sol/IToken.json"
         }
       }
     },

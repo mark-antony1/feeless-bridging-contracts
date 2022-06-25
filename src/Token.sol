@@ -11,7 +11,7 @@ contract Token is ERC20 {
         admin = _admin;
     }
 
-    function mintMore(uint amount, address recipient) public {
+    function mintMore(address recipient, uint amount) public {
         require(msg.sender == admin);
         _mint(recipient, amount);
     }
