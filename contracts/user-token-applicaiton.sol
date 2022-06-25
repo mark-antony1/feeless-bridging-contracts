@@ -5,8 +5,8 @@ pragma abicoder v2;
 
 import "../lzApp/NonblockingLzApp.sol";
 
-/// @title A LayerZero example sending a cross chain message from a source chain to a destination chain to increment a counter
 contract OmniCounter is NonblockingLzApp {
+
     uint public counter;
 
     constructor(address _lzEndpoint) NonblockingLzApp(_lzEndpoint) {}
