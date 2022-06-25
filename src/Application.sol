@@ -3,9 +3,9 @@
 pragma solidity 0.8.4;
 pragma abicoder v2;
 
-import "../lzApp/NonblockingLzApp.sol";
+import "./NonblockingLzApp.sol";
 
-contract OmniCounter is NonblockingLzApp {
+contract Application is NonblockingLzApp {
 
     uint public counter;
 
