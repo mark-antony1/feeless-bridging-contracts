@@ -38,5 +38,189 @@
     "object": "0x",
     "sourceMap": "",
     "linkReferences": {}
-  }
+  },
+  "methodIdentifiers": {
+    "lzReceive(uint16,bytes,uint64,bytes)": "001d3567"
+  },
+  "ast": {
+    "absolutePath": "src/interfaces/ILayerZeroReceiver.sol",
+    "id": 3364,
+    "exportedSymbols": {
+      "ILayerZeroReceiver": [
+        3363
+      ]
+    },
+    "nodeType": "SourceUnit",
+    "src": "33:559:12",
+    "nodes": [
+      {
+        "id": 3351,
+        "nodeType": "PragmaDirective",
+        "src": "33:24:12",
+        "literals": [
+          "solidity",
+          ">=",
+          "0.5",
+          ".0"
+        ]
+      },
+      {
+        "id": 3363,
+        "nodeType": "ContractDefinition",
+        "src": "59:532:12",
+        "nodes": [
+          {
+            "id": 3362,
+            "nodeType": "FunctionDefinition",
+            "src": "473:116:12",
+            "functionSelector": "001d3567",
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "lzReceive",
+            "nameLocation": "482:9:12",
+            "parameters": {
+              "id": 3360,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 3353,
+                  "mutability": "mutable",
+                  "name": "_srcChainId",
+                  "nameLocation": "499:11:12",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 3362,
+                  "src": "492:18:12",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint16",
+                    "typeString": "uint16"
+                  },
+                  "typeName": {
+                    "id": 3352,
+                    "name": "uint16",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "492:6:12",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint16",
+                      "typeString": "uint16"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 3355,
+                  "mutability": "mutable",
+                  "name": "_srcAddress",
+                  "nameLocation": "527:11:12",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 3362,
+                  "src": "512:26:12",
+                  "stateVariable": false,
+                  "storageLocation": "calldata",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_calldata_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 3354,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "512:5:12",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 3357,
+                  "mutability": "mutable",
+                  "name": "_nonce",
+                  "nameLocation": "547:6:12",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 3362,
+                  "src": "540:13:12",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint64",
+                    "typeString": "uint64"
+                  },
+                  "typeName": {
+                    "id": 3356,
+                    "name": "uint64",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "540:6:12",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint64",
+                      "typeString": "uint64"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 3359,
+                  "mutability": "mutable",
+                  "name": "_payload",
+                  "nameLocation": "570:8:12",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 3362,
+                  "src": "555:23:12",
+                  "stateVariable": false,
+                  "storageLocation": "calldata",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_calldata_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 3358,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "555:5:12",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "491:88:12"
+            },
+            "returnParameters": {
+              "id": 3361,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "588:0:12"
+            },
+            "scope": 3363,
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          }
+        ],
+        "abstract": false,
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "interface",
+        "fullyImplemented": false,
+        "linearizedBaseContracts": [
+          3363
+        ],
+        "name": "ILayerZeroReceiver",
+        "nameLocation": "69:18:12",
+        "scope": 3364,
+        "usedErrors": []
+      }
+    ],
+    "license": "MIT"
+  },
+  "id": 12
 }
