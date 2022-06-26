@@ -68,6 +68,7 @@ const BridgeBox = () => {
 			);
 			await tx.wait();
 			tx.hash && setIsApproved(true);
+			setErrorMessage(`Successful approval!`);
 			console.log("\n\napproveTokens response", tx, "\n\n");
 		} catch (err) {
 			setErrorMessage(err.message);
@@ -255,7 +256,11 @@ const BridgeBox = () => {
 						}}
 						fluid
 						selection
-						options={selectedBridge === "Connext" ? connextChainOptions: chainOptions}
+						options={
+							selectedBridge === "Connext"
+								? connextChainOptions
+								: chainOptions
+						}
 						style={{
 							width: 200,
 							marginLeft: 8,
@@ -372,7 +377,11 @@ const BridgeBox = () => {
 						}}
 						fluid
 						selection
-						options={selectedBridge === "Connext" ? connextChainOptions: chainOptions}
+						options={
+							selectedBridge === "Connext"
+								? connextChainOptions
+								: chainOptions
+						}
 						style={{
 							width: 200,
 							marginLeft: 25,
@@ -430,7 +439,8 @@ const BridgeBox = () => {
 						/>
 					</div>
 				</Form.Field>
-				{errorMessage.includes("You transferred") ? (
+				{errorMessage.includes("You transferred") ||
+				errorMessage.includes("Successful") ? (
 					<Message
 						style={{
 							overflow: "hidden",
