@@ -25,6 +25,7 @@ const BridgeBox = () => {
 	const [toChainId, setToChainId] = useState("");
 	const [fromAmount, setFromAmount] = useState("");
 	const [toAmount, setToAmount] = useState("0.00");
+	const [isApproved, setIsApproved] = useState(false);
 	const [selectedBridge, setSelectedBridge] = useState("LayerZero");
 	const [errorMessage, setErrorMessage] = useState("");
 	const [loading, setLoading] = useState(false);
@@ -36,7 +37,7 @@ const BridgeBox = () => {
 	const RECIPIENT_ADDRESS = "0xDe076D651613C7bde3260B8B69C860D67Bc16f49";
 
 	// Get user's active account and chainId
-	const { account, chainId } = useEthers();
+	const { account } = useEthers();
 
 	// Get provider and signer
 	const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -56,38 +57,41 @@ const BridgeBox = () => {
 		signer
 	);
 
-	// Send the token contract the application contract's address and an amount
-	const approveTokens = async () => {
-		const response = await tokenContract.approve(
-			APPLICATION_CONTRACT_ADDRESS,
-			fromAmount
-		);
-		console.log("\n\napproveTokens response", response, "\n\n");
+	const onApprove = async () => {
+		setLoading(true);
+		setErrorMessage("");
+		try {
+			const response = await tokenContract.approve(
+				APPLICATION_CONTRACT_ADDRESS,
+				fromAmount
+			);
+			response.hash && setIsApproved(true);
+			console.log("\n\napproveTokens response", response, "\n\n");
+		} catch (err) {
+			setErrorMessage(err.message);
+		}
+
+		setLoading(false);
 	};
 
-	const transferTokens = async () => {
-		const response = await applicationContract.transfer(
-			toChainId,
-			RECIPIENT_ADDRESS,
-			fromAmount
-		);
-		console.log("\n\ntransferTokens response", response, "\n\n");
-	};
-
-	const onSubmit = async (event) => {
-		event.preventDefault();
+	const onBridge = async () => {
 		setLoading(true);
 		setErrorMessage("");
 
 		try {
-			await approveTokens();
-			await transferTokens();
+			const response = await applicationContract.transfer(
+				toChainId,
+				RECIPIENT_ADDRESS,
+				fromAmount,
+				{ gasLimit: 1000000 }
+			);
+			response.hash &&
+				setErrorMessage(
+					`You transferred ${fromAmount} AUSDC from Polygon to Optimism, WITH NO SLIPPAGE!`
+				);
+			console.log("\n\ntransferTokens response", response, "\n\n");
 		} catch (err) {
-			err.message.includes("Internal JSON-RPC error.")
-				? setErrorMessage(
-						`You transferred ${fromAmount} AUSDC from Polygon to Optimism, WITH NO SLIPPAGE!`
-				  )
-				: setErrorMessage(err.message);
+			setErrorMessage(err.message);
 		}
 
 		setLoading(false);
@@ -188,7 +192,9 @@ const BridgeBox = () => {
 				/>
 			</Menu>
 			<Form
-				onSubmit={onSubmit}
+				onSubmit={() => {
+					isApproved ? onBridge() : onApprove();
+				}}
 				error={!!errorMessage}
 				style={{
 					marginTop: 10,
@@ -202,7 +208,7 @@ const BridgeBox = () => {
 							marginLeft: 15,
 						}}
 					>
-						from
+						From
 					</label>
 					<Dropdown
 						value={fromChainId}
@@ -226,6 +232,27 @@ const BridgeBox = () => {
 							borderColor: colors.inputBorder,
 						}}
 					/>
+					{account ? (
+						<div style={{ display: "flex", alignItems: "center" }}>
+							<label
+								style={{
+									color: colors.labelText,
+									fontWeight: "bold",
+									marginLeft: 15,
+								}}
+							>
+								Balance
+							</label>
+							<p
+								style={{
+									color: colors.labelText,
+									marginLeft: 15,
+								}}
+							>
+								10035.26
+							</p>
+						</div>
+					) : null}
 				</Form.Field>
 				<Form.Field>
 					<div
@@ -298,7 +325,7 @@ const BridgeBox = () => {
 							marginLeft: 15,
 						}}
 					>
-						to
+						To
 					</label>
 					<Dropdown
 						value={toChainId}
@@ -397,17 +424,31 @@ const BridgeBox = () => {
 					/>
 				)}
 				{account ? (
-					<Button
-						style={{
-							width: "90%",
-							height: 50,
-							marginBottom: 10,
-						}}
-						secondary
-						loading={loading}
-					>
-						Bridge Token
-					</Button>
+					isApproved ? (
+						<Button
+							style={{
+								width: "90%",
+								height: 50,
+								marginBottom: 10,
+							}}
+							secondary
+							loading={loading}
+						>
+							Bridge Tokens
+						</Button>
+					) : (
+						<Button
+							style={{
+								width: "90%",
+								height: 50,
+								marginBottom: 10,
+							}}
+							secondary
+							loading={loading}
+						>
+							Approve
+						</Button>
+					)
 				) : (
 					<Button
 						style={{
@@ -419,7 +460,7 @@ const BridgeBox = () => {
 						secondary
 						disabled={true}
 					>
-						Bridge Token
+						Bridge Tokens
 					</Button>
 				)}
 			</Form>
