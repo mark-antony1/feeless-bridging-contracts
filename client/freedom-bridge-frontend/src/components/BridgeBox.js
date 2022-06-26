@@ -16,6 +16,7 @@ import application from "../contracts/application.json";
 import token from "../contracts/token.json";
 import optimismLogo from "../assets/optimismLogo.png";
 import polygonLogo from "../assets/polygonLogo.png";
+import ethereumLogo from "../assets/ethereumLogo.png";
 import usdcLogo from "../assets/usdcLogo.png";
 import whiteArrows from "../assets/whiteArrows.png";
 
@@ -124,6 +125,33 @@ const BridgeBox = () => {
 		},
 	];
 
+	const connextChainOptions = [
+		{
+			key: "Optimism",
+			text: "Rinkeby",
+			value: OptimismKovan.chainId,
+			image: (
+				<img
+					alt="optimismLogo"
+					src={ethereumLogo}
+					style={{ paddingRight: 5 }}
+				/>
+			),
+		},
+		{
+			key: "Polygon",
+			text: "Goerli",
+			value: Mumbai.chainId,
+			image: (
+				<img
+					alt="polygonLogo"
+					src={ethereumLogo}
+					style={{ paddingRight: 5 }}
+				/>
+			),
+		},
+	];
+
 	const tokenOptions = [
 		{
 			key: "AUSDC",
@@ -222,7 +250,7 @@ const BridgeBox = () => {
 						}}
 						fluid
 						selection
-						options={chainOptions}
+						options={selectedBridge === "Connext" ? connextChainOptions: chainOptions}
 						style={{
 							width: 200,
 							marginLeft: 8,
@@ -339,7 +367,7 @@ const BridgeBox = () => {
 						}}
 						fluid
 						selection
-						options={chainOptions}
+						options={selectedBridge === "Connext" ? connextChainOptions: chainOptions}
 						style={{
 							width: 200,
 							marginLeft: 25,
