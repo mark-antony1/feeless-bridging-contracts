@@ -4,7 +4,7 @@ pragma solidity 0.8.4;
 pragma abicoder v2;
 
 import "./NonblockingLzApp.sol";
-import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+import "@openzeppelin-contracts/token/ERC20/IERC20.sol";
 import "./interfaces/IToken.sol";
 
 contract Application is NonblockingLzApp {
