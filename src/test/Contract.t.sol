@@ -2,6 +2,7 @@
 pragma solidity 0.8.4;
 
 import "ds-test/test.sol";
+import "forge-std/console.sol";
 
 import "../Application.sol"; 
 import "../Token.sol"; 
@@ -14,10 +15,12 @@ contract ContractTest is DSTest {
         application = new Application(0x4f9B2913e5D80A2B74b187F6286B8580F42D1a8f);
         token = new Token("AUSDC", "AUSDC", address(application));
         application.setTokenContract(address(token));
+        assertTrue(application.tokenContract() == address(token));
 
         address randomAddress = address(0x4f9B2913e5D80A2B74b187F6286B8580F42D1a8f);
         application.setTrustedRemote(69, abi.encode(randomAddress));
         address trustedRemoteLookup = application.retrieveTrustedRemoteLookup(69);
+
         assertTrue(trustedRemoteLookup == randomAddress);
     }
 

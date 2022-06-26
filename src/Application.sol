@@ -22,12 +22,8 @@ contract Application is NonblockingLzApp {
         tokenContract = _tokenContract;
     }
 
-    function retrieveTrustedRemoteLookup(uint16 _chainId) public view returns (address trustedAddress) {
-        bytes memory addressBytes = trustedRemoteLookup[_chainId];
-
-        assembly {
-            trustedAddress := mload(add(addressBytes,20))
-        }
+    function retrieveTrustedRemoteLookup(uint16 _chainId) public view returns (address) {
+        return abi.decode(trustedRemoteLookup[_chainId], (address));
     }
 
     function _nonblockingLzReceive(uint16 _srcChainId, bytes memory _srcAddress, uint64 _nonce, bytes memory _payload) internal override {
