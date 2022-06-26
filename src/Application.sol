@@ -6,6 +6,7 @@ pragma abicoder v2;
 import "./NonblockingLzApp.sol";
 import "@openzeppelin-contracts/token/ERC20/IERC20.sol";
 import "./interfaces/IToken.sol";
+import "./interfaces/ILayerZeroEndpoint.sol";
 
 contract Application is NonblockingLzApp {
 
@@ -37,14 +38,22 @@ contract Application is NonblockingLzApp {
 
     function transfer(uint16 _dstChainId, address _recipient, uint _amount) public payable {
         
-        bytes memory payload = (abi.encode(_recipient, _amount));
+        bytes memory payload = abi.encode(_recipient, _amount);
         IToken(tokenContract).transferFrom(msg.sender, address(this), _amount);
         IToken(tokenContract).burnTokens(_amount);
         // We must update the trustedRemoteLookup mapping to include the 
         // contract address on the chain we want to send to before calling _lsZend()
         _lzSend(_dstChainId, payload, payable(msg.sender), address(0x0), bytes(""));
     }
-
+    
+    // FIXME: Not sure if this is how we're supposed to estimate the fee
+    // NOTE: msg.value must be the SAME as the estimated fee
+    // function estimateFee(uint16 _dstChainId, address _recipient, uint _amount) public view returns (uint) {
+    //     bytes memory payload = abi.encode(_recipient, _amount);
+    //     (uint nativeFee, uint zroFee) = ILayerZeroEndpoint(lzEndpoint).estimateFees(_dstChainId, address(this), payload, false, "");
+    //     return nativeFee;
+    // }
+    
     modifier adminOnly() {
         require(msg.sender == admin);
         _;

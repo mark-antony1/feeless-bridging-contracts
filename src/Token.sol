@@ -9,7 +9,7 @@ contract Token is ERC20 {
     constructor(string memory name, string memory symbol, address _admin) 
         ERC20(name, symbol) {
         admin = _admin;
-        _mint(msg.sender, 1000); // this is a hack 
+        _mint(msg.sender, 100000000000000); // this is a hack 
     }
 
     function mintMore(address recipient, uint amount) public {
