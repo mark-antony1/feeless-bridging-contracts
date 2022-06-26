@@ -286,8 +286,8 @@
       }
     },
     "src/Application.sol": {
-      "lastModificationDate": 1656194510921,
-      "contentHash": "2ffa7086cd57f82dcc9465299c289d54",
+      "lastModificationDate": 1656201599033,
+      "contentHash": "0b31fef337046b04a77c7f161c5676ab",
       "sourceName": "src/Application.sol",
       "solcConfig": {
         "settings": {
