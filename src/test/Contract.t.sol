@@ -27,8 +27,9 @@ contract ContractTest is DSTest {
         assertTrue(trustedRemoteLookup == randomAddress);
 
         vm.prank(address(application));
-        token.mintMore(address(application), 1000);
-        assertTrue(token.balanceOf(address(application)) == 1000);
+        token.mintMore(address(this), 1000);
+        assertTrue(token.balanceOf(address(this)) == 1000);
+        token.approve(address(application), 1000);
 
         console.log("about to go into transfer");
         application.transfer{value: 1000}(10011, randomAddress, 1000);
