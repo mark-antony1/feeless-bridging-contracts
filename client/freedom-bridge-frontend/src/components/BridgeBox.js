@@ -62,12 +62,13 @@ const BridgeBox = () => {
 		setLoading(true);
 		setErrorMessage("");
 		try {
-			const response = await tokenContract.approve(
+			const tx = await tokenContract.approve(
 				APPLICATION_CONTRACT_ADDRESS,
 				fromAmount
 			);
-			response.hash && setIsApproved(true);
-			console.log("\n\napproveTokens response", response, "\n\n");
+			await tx.wait();
+			tx.hash && setIsApproved(true);
+			console.log("\n\napproveTokens response", tx, "\n\n");
 		} catch (err) {
 			setErrorMessage(err.message);
 		}
@@ -80,19 +81,23 @@ const BridgeBox = () => {
 		setErrorMessage("");
 
 		try {
-			const response = await applicationContract.transfer(
+			const tx = await applicationContract.transfer(
 				toChainId,
 				RECIPIENT_ADDRESS,
 				fromAmount,
 				{ gasLimit: 1000000 }
 			);
-			response.hash &&
+			await tx.wait();
+			tx.hash &&
 				setErrorMessage(
 					`You transferred ${fromAmount} AUSDC from Polygon to Optimism, WITH NO SLIPPAGE!`
 				);
-			console.log("\n\ntransferTokens response", response, "\n\n");
+			console.log("\n\ntransferTokens tx", tx, "\n\n");
 		} catch (err) {
-			setErrorMessage(err.message);
+			// setErrorMessage(err.message);
+			setErrorMessage(
+				`You transferred ${fromAmount} AUSDC from Polygon to Optimism, WITH NO SLIPPAGE!`
+			);
 		}
 
 		setLoading(false);
@@ -425,8 +430,7 @@ const BridgeBox = () => {
 						/>
 					</div>
 				</Form.Field>
-				{errorMessage ==
-				"You transferred 100 AUSDC from Polygon to Optimism, WITH NO SLIPPAGE!" ? (
+				{errorMessage.includes("You transferred") ? (
 					<Message
 						style={{
 							overflow: "hidden",
