@@ -1,7 +1,8 @@
 import "./App.css";
-import background from "./assets/backgroundImage.png";
+import bg from "./assets/backgroundImage.png";
 import { DAppProvider, Mumbai, OptimismKovan } from "@usedapp/core";
-import Layout from "./components/Layout";
+import "semantic-ui-css/semantic.min.css";
+import Header from "./components/Header";
 import Footer from "./components/Footer";
 import BridgeBox from "./components/BridgeBox";
 
@@ -19,34 +20,20 @@ const App = () => {
 
 	return (
 		<DAppProvider config={config}>
-			<div
-				style={{ backgroundImage: `url(${background})` }}
-				className="App"
-			>
+			<div style={{ backgroundImage: `url(${bg})` }} className="App">
 				<header className="App-header">
-					<Layout>
-						<div
-							style={{
-								marginTop: 50,
-								display: "grid",
-								alignItems: "center",
-								justifyContent: "center",
-							}}
-						>
-							<BridgeBox />
-						</div>
-					</Layout>
+					<Header />
+					<div
+						style={{
+							display: "flex",
+							alignItems: "center",
+							justifyContent: "center",
+						}}
+					>
+						<BridgeBox />
+					</div>
+					<Footer />
 				</header>
-				<Footer
-					style={{
-						marginTop: "1rem",
-						padding: "1rem",
-						position: "fixed",
-						bottom: 0,
-						left: 0,
-						width: "100%",
-					}}
-				/>
 			</div>
 		</DAppProvider>
 	);

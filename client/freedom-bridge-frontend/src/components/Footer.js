@@ -3,7 +3,12 @@ import footerBanner from "../assets/footerBanner.png";
 
 const Footer = () => {
 	return (
-		<div style={{ display: "flex" }}>
+		<div
+			style={{
+				display: "flex",
+				alignItems: "end",
+			}}
+		>
 			<img
 				alt="footerBanner"
 				src={footerBanner}

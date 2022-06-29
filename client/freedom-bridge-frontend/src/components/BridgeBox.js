@@ -203,7 +203,7 @@ const BridgeBox = () => {
 					width: "100%",
 				}}
 			>
-				Bridge
+				Sky Bridge
 			</h3>
 			<Menu
 				widths={2}
